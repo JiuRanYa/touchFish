@@ -7,21 +7,32 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "tauri-app",
+    "productName": "touchFish",
     "version": "0.0.0"
   },
   "tauri": {
     "allowlist": {
-      "all": false,
+      "all": true,
       "shell": {
         "all": false,
         "open": true
       }
     },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "touch-fish",
+        "width": 800,
+        "height": 600,
+        "transparent": true
+      }
+    ],
+    "macOSPrivateApi": true,
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.dev",
+      "identifier": "Jiuran",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -32,15 +43,6 @@
     },
     "security": {
       "csp": null
-    },
-    "windows": [
-      {
-        "fullscreen": false,
-        "resizable": true,
-        "title": "tauri-app",
-        "width": 800,
-        "height": 600
-      }
-    ]
+    }
   }
 }
