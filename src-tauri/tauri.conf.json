@@ -25,7 +25,15 @@
         "title": "touch-fish",
         "width": 800,
         "height": 600,
-        "transparent": true
+        "visible": false,
+        "decorations": false
+      },
+      {
+        "width": 400,
+        "height": 200,
+        "decorations": false,
+        "url": "splashscreen.html",
+        "label": "splashscreen"
       }
     ],
     "macOSPrivateApi": true,
