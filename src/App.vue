@@ -12,7 +12,4 @@ import HomePage from "./views/home/index.vue";
 body {
   margin: 0;
 }
-.container {
-  border-radius: 18px;
-}
 </style>

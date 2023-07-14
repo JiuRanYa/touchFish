@@ -23,7 +23,7 @@ const url = ref();
 function createWebWindow() {
   const webview = new WebviewWindow("theUniqueLabel", {
     url: url.value,
-    transparent: true,
+    transparent: false,
     titleBarStyle: "transparent",
     hiddenTitle: true,
     minimizable: false,
@@ -42,7 +42,6 @@ function createWebWindow() {
   position: fixed;
   top: 0;
   z-index: 100;
-  border-radius: 18px;
   width: 100vw;
 }
 .titlebar {
@@ -67,21 +66,12 @@ function createWebWindow() {
   background: #5bbec3;
 }
 .homepage {
-  border-radius: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  opacity: 0.5;
+  opacity: 0.3;
   background: #fff;
-
-  .drop-area {
-    width: 300px;
-    height: 150px;
-    border: 1px dashed grey;
-    border-radius: 12px;
-    margin-top: 40px;
-  }
 }
 </style>
