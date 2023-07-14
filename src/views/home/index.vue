@@ -1,23 +1,10 @@
 <template>
-  <div data-tauri-drag-region class="titlebar">
-    <div class="titlebar-button" id="titlebar-minimize">
-      <img
-        src="https://api.iconify.design/mdi:window-minimize.svg"
-        alt="minimize"
-      />
-    </div>
-    <div class="titlebar-button" id="titlebar-maximize">
-      <img
-        src="https://api.iconify.design/mdi:window-maximize.svg"
-        alt="maximize"
-      />
-    </div>
-    <div class="titlebar-button" id="titlebar-close">
-      <img src="https://api.iconify.design/mdi:close.svg" alt="close" />
-    </div>
-  </div>
+  <div class="homepage-bar" data-tauri-drag-region></div>
   <div class="homepage">
-    <div>拖动你想放置的软件1</div>
+    <el-row>
+      <div>请输入需要内嵌的URL，输入回车确定</div>
+      <el-input v-model="url" @keyup.enter="createWebWindow" />
+    </el-row>
   </div>
 </template>
 
@@ -33,31 +20,31 @@ defineComponent({
 
 const url = ref();
 
-onMounted(() => {
-  // const webview = new WebviewWindow("theUniqueLabel", {
-  //   // url: "https://weread.qq.com/web/reader/864325c052a341864c4cdd2",
-  //   transparent: true,
-  //   titleBarStyle: "transparent",
-  //   hiddenTitle: true,
-  //   minimizable: false,
-  // });
-  //
-  // webview.once("tauri://created", function () {
-  //   // webview window successfully created
-  //   console.log(123);
-  // });
-
-  let win = appWindow;
-  win.set_transparent_titlebar(true, false);
-
-  // 添加监听函数，监听 DOM 内容加载完成事件
-  document.addEventListener("DOMContentLoaded", () => {
-    invoke("close_splashscreen");
+function createWebWindow() {
+  const webview = new WebviewWindow("theUniqueLabel", {
+    url: url.value,
+    transparent: true,
+    titleBarStyle: "transparent",
+    hiddenTitle: true,
+    minimizable: false,
   });
-});
+
+  webview.once("tauri://created", function () {
+    // webview window successfully created
+    console.log(123);
+  });
+}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.homepage-bar {
+  height: 40px;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  border-radius: 18px;
+  width: 100vw;
+}
 .titlebar {
   height: 30px;
   background: #329ea3;
@@ -80,11 +67,14 @@ onMounted(() => {
   background: #5bbec3;
 }
 .homepage {
+  border-radius: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  opacity: 0.5;
+  background: #fff;
 
   .drop-area {
     width: 300px;
