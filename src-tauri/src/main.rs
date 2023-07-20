@@ -52,7 +52,7 @@ fn main() {
         .setup(|app| {
             let win = app.get_window("main").unwrap();
 
-            win.set_transparent_titlebar(true, false);
+            // win.set_transparent_titlebar(true, false);
 
             Ok(())
         })

@@ -1,15 +1,5 @@
-<script setup lang="ts">
-import HomePage from "./views/home/index.vue";
-</script>
-
 <template>
-  <div class="container">
-    <HomePage />
-  </div>
+  <router-view />
 </template>
 
-<style>
-body {
-  margin: 0;
-}
-</style>
+<style></style>

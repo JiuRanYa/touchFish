@@ -1,18 +1,17 @@
 <template>
-  <div class="homepage-bar" data-tauri-drag-region></div>
   <div class="homepage">
-    <el-row>
-      <div>请输入需要内嵌的URL，输入回车确定</div>
-      <el-input v-model="url" @keyup.enter="createWebWindow" />
-    </el-row>
+    <div class="homepage-title">
+      <van-field v-model="url" label="文本" placeholder="请输入嵌入的网址" />
+
+      <van-button type="primary" @click="createWebWindow">新建</van-button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
-import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
-import { invoke } from "@tauri-apps/api/tauri";
-import * as app from "@tauri-apps/api/app";
+import { defineComponent, ref } from "vue";
+import { WebviewWindow } from "@tauri-apps/api/window";
+import { open } from "@tauri-apps/api/shell";
 
 defineComponent({
   name: "homepage",
@@ -20,7 +19,7 @@ defineComponent({
 
 const url = ref();
 
-function createWebWindow() {
+async function createWebWindow() {
   const webview = new WebviewWindow("theUniqueLabel", {
     url: url.value,
     transparent: false,
@@ -28,11 +27,7 @@ function createWebWindow() {
     hiddenTitle: true,
     minimizable: false,
   });
-
-  webview.once("tauri://created", function () {
-    // webview window successfully created
-    console.log(123);
-  });
+  await open("https://github.com/tauri-apps/tauri");
 }
 </script>
 
@@ -43,6 +38,7 @@ function createWebWindow() {
   top: 0;
   z-index: 100;
   width: 100vw;
+  background: red;
 }
 .titlebar {
   height: 30px;
@@ -67,11 +63,23 @@ function createWebWindow() {
 }
 .homepage {
   display: flex;
-  justify-content: center;
+  padding-top: 40px;
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  opacity: 0.3;
-  background: #fff;
+  opacity: 1;
+
+  &-title {
+    margin-bottom: 20px;
+  }
+
+  &-card {
+    width: 120px;
+    height: 120px;
+    border-radius: 14px;
+    background: #2b2f62;
+    backdrop-filter: blur(5px);
+    margin-bottom: 20px;
+  }
 }
 </style>
